@@ -84,15 +84,22 @@ ind = np.array(range(len(label)))
 ones = ind[label[ind] == 1]
 ax1 = plt.subplot(2,1,1)
 ax2 = plt.subplot(2,1,2)
-def co(n):
+label = np.array([ int(value[1]) for value in values ])
+ind = np.array(range(len(label)))
+ones = ind[label[ind] == 1]
+ax1 = plt.subplot(2,1,1)
+ax2 = plt.subplot(2,1,2)
+def co(n, bins=None):
     field = np.array([float(value[2+n]) for value in values])
     field1 = field[ones]
     ax1.cla()
     ax2.cla()
-    ax1.hist(field)
-    ax2.hist(field1)
+    if bins is None: bins = 20
+    ax1.hist(field, bins=bins)
+    ax2.hist(field1, bins=bins)
 
 ind = np.array([2,20,22,23,32,33,42,44,46,47,48,50])
+ind = np.array([2,22,23,32,33])
 """
 2,20,22,23,32,33,42*,44*,46*,47*,48*,50*
 """
