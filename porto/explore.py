@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-path = "/Users/T162880/Documents/Programs/kaggle/porto/"
 path = "/Users/apple/Documents/Programs/kaggle/porto/"
+path = "/Users/T162880/Documents/Programs/kaggle/porto/"
 path = "/Users/Public/Documents/Kaggle/porto/"
 train_file = "train.csv"
 columns = "id,target,ps_ind_01,ps_ind_02_cat,ps_ind_03,ps_ind_04_cat,ps_ind_05_cat,ps_ind_06_bin,ps_ind_07_bin,ps_ind_08_bin,ps_ind_09_bin,ps_ind_10_bin,ps_ind_11_bin,ps_ind_12_bin,ps_ind_13_bin,ps_ind_14,ps_ind_15,ps_ind_16_bin,ps_ind_17_bin,ps_ind_18_bin,ps_reg_01,ps_reg_02,ps_reg_03,ps_car_01_cat,ps_car_02_cat,ps_car_03_cat,ps_car_04_cat,ps_car_05_cat,ps_car_06_cat,ps_car_07_cat,ps_car_08_cat,ps_car_09_cat,ps_car_10_cat,ps_car_11_cat,ps_car_11,ps_car_12,ps_car_13,ps_car_14,ps_car_15,ps_calc_01,ps_calc_02,ps_calc_03,ps_calc_04,ps_calc_05,ps_calc_06,ps_calc_07,ps_calc_08,ps_calc_09,ps_calc_10,ps_calc_11,ps_calc_12,ps_calc_13,ps_calc_14,ps_calc_15_bin,ps_calc_16_bin,ps_calc_17_bin,ps_calc_18_bin,ps_calc_19_bin,ps_calc_20_bin"
@@ -78,6 +78,24 @@ with open(path+train_file) as fd:
         if not line: break
         fields = line.strip().split(",")
         values.append(fields)
+
+label = np.array([ int(value[1]) for value in values ])
+ind = np.array(range(len(label)))
+ones = ind[label[ind] == 1]
+ax1 = plt.subplot(2,1,1)
+ax2 = plt.subplot(2,1,2)
+def co(n):
+    field = np.array([float(value[2+n]) for value in values])
+    field1 = field[ones]
+    ax1.cla()
+    ax2.cla()
+    ax1.hist(field)
+    ax2.hist(field1)
+
+ind = np.array([2,20,22,23,32,33,42,44,46,47,48,50])
+"""
+2,20,22,23,32,33,42*,44*,46*,47*,48*,50*
+"""
 
 def f(n):
     print([value[n] for value in values[:10]])
